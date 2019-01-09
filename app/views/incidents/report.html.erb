@@ -1,0 +1,29 @@
+<div class = 'col-md-8 offset-2'>
+
+    <h1 class = "text-center">Incident Reporting</h1>
+
+    <%= form_for @incident, html: { multipart: true } do |f| %> 
+      <br>
+      <%= f.label :school_name %>
+      <%= collection_select(:incident, :school_id, School.all, :id, :school_name, {:include_blank => true}, {:class => 'form-control'}) %>
+      <br>
+      <%= f.label :details %>
+      <%= f.text_field :details, class: 'form-control', style: 'width: 930px; height: 100px;'  %>
+      <br>
+
+    <label class="btn btn-secondary">
+       Add Photos
+    <span style="display:none;">
+    <%= f.file_field :attachment, required: true, multiple: true %>
+    </span>
+   </label>
+
+      <br>
+      <%= f.submit "Save", class:'btn btn-success float-right' %>
+    <% end %>
+
+ <br>
+ <br>
+    <%= link_to "Submit Detailed Report", detaileds_path, class:'btn btn-danger float-right' %>
+</div>
+ 

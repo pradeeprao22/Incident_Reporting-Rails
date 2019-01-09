@@ -1,0 +1,46 @@
+<div class = 'col-md-8 offset-2'>
+
+  <h1 class = "text-center">Detailed Incident Reporting</h1>
+
+  <%= simple_form_for @detailed, url: detaileds_path do |f| %>
+
+    <%= f.label :school_name %>
+    <%= collection_select(:detailed, :school_id, School.all, :id, :school_name, {:include_blank => true}, {:class => 'form-control'})  %>
+    <br>
+    <%= f.input :tag_ids, :label => 'Type of Incident', as: :select, collection: Tag.order(:name), label_method: :name, class: 'chosen-select form-control', input_html: {multiple: true} %>
+    
+    <%= f.input :otherfortag, :label => 'Other if incident type is not mentioned', class:'form-control' %>
+    
+    <%= f.input :name, class:'form-control' %>
+    
+    <%= f.input :emailornumber, :label => 'Email/Phone', class: 'form-control', placeholder: 'Enter your email or number' %>
+    
+    <%= f.label :role %>
+    <%= f.select :role, (['student', 'teacher', 'other staff', 'comunity member']), {}, { class: "form form-group form-control"} %>
+    
+    <%= f.input :involved, :label => 'People Involved', class: 'form-control', placeholder: 'Name and other details of people involved (student, teacher, staff, parent, grade level)' %>
+    
+    <%= f.input :observer, :label => 'Other observers', class: 'form-control', placeholder: 'Name and details' %>
+    
+    <%= f.input :dateortime, :label => 'Date/Time', placeholder: 'Mention date and time of incident', style: 'width: 300px;' %>
+    
+    <%= f.label :location %>
+    <%= f.select :location, (['On school campuses and grounds', 'During transportation to and from school', 'At school-sponsored events', 'More details']), {}, { class: "form form-group form-control"} %>
+    
+    <%= f.input :other, :label => 'Other (more details)',class: 'form-control' %>
+
+    <%= f.input :description, :label => 'Incident Description', class: 'form-control required', placeholder:'Describe incident in as much detail as possible' %>
+
+    <label class="btn btn-secondary">
+       Add Photos, Videos or File
+    <span style="display:none;">
+    <%= f.file_field :attachment, required: true, multiple: true %>
+    </span>
+   </label>
+    <br>
+    <br>
+    <%= f.submit "Submit Report", class: 'btn btn-lg btn-success float-right' %>
+  <% end %>
+     <%= link_to "Back", root_path, class:'btn btn btn-primary' %>
+     <br>
+</div>
